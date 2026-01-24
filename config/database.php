@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'libsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +30,14 @@ return [
     */
 
     'connections' => [
-
+        "libsql" => [
+            "driver" => "libsql",
+            "database" => database_path("database.db"),
+            "url" => env("TURSO_DATABASE_URL"),
+            "password" => env("TURSO_AUTH_TOKEN"),
+            "sync_interval" => env("TURSO_SYNC_INTERVAL", 30),
+            'prefix' => '',
+        ],
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
