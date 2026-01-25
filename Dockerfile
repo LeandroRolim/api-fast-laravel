@@ -15,6 +15,7 @@ FROM dunglas/frankenphp:1.11.1-php8.5-alpine
 
 # Instalar extensões necessárias (ajuste conforme seu app)
 RUN install-php-extensions \
+    ffi \
     pcntl \
     gd \
     intl \
@@ -23,7 +24,7 @@ RUN install-php-extensions \
 
 # Configurações de produção do PHP
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-
+RUN echo "ffi.enable=1" > $PHP_INI_DIR/conf.d/docker-php-ext-ffi.ini
 # Copiar os arquivos da aplicação
 COPY . /app
 COPY --from=vendor /app/vendor /app/vendor
@@ -48,4 +49,6 @@ RUN php artisan config:cache && \
 EXPOSE 8080
 
 # Comando para iniciar o Octane com FrankenPHP
-CMD ["php", "artisan", "octane:start", "--server=frankenphp", "--host=0.0.0.0", "--port=8080"]
+#CMD ["php", "artisan", "octane:start", "--server=frankenphp", "--host=0.0.0.0", "--port=8080"]
+
+CMD ["php", "-m"]
