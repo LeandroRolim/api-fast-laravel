@@ -11,7 +11,7 @@ RUN composer install \
     --prefer-dist
 
 # Imagem final usando FrankenPHP
-FROM dunglas/frankenphp:1.1-php8.4-alpine
+FROM dunglas/frankenphp:1.11.1-php8.5-alpine
 
 # Instalar extensões necessárias (ajuste conforme seu app)
 RUN install-php-extensions \
