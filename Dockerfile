@@ -35,14 +35,13 @@ WORKDIR /app
 # Variáveis de ambiente para o Octane/FrankenPHP
 ENV AUTOCONF_CADDYFILE_SERVER_NAME="0.0.0.0"
 ENV LARAVEL_OCTANE_SERVER="frankenphp"
+ENV LOG_CHANNEL="stderr"
 
 # Permissões de escrita para o storage e cache
 RUN chmod -R 775 storage bootstrap/cache
 
-# Otimização do Laravel (Crucial para Cloud Run)
-RUN php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache
+# Otimização do Laravel
+# Evitar config:cache durante build para não congelar variáveis de ambiente
 
 # Expor a porta que o Cloud Run espera (padrão 8080)
 EXPOSE 8080
