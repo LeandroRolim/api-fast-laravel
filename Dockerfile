@@ -33,7 +33,9 @@ COPY --from=vendor /app/vendor /app/vendor
 WORKDIR /app
 
 # Variáveis de ambiente para o Octane/FrankenPHP
+ARG PORT=8080
 ENV AUTOCONF_CADDYFILE_SERVER_NAME="0.0.0.0"
+ENV SERVER_NAME=":${PORT}"
 ENV LARAVEL_OCTANE_SERVER="frankenphp"
 ENV LOG_CHANNEL="stderr"
 

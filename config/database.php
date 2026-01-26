@@ -32,10 +32,10 @@ return [
     'connections' => [
         "libsql" => [
             "driver" => "libsql",
-            "database" => database_path("database.db"),
+            "database" => null, //database_path("database.db"),
             "url" => env("TURSO_DATABASE_URL"),
             "password" => env("TURSO_AUTH_TOKEN"),
-            "sync_interval" => env("TURSO_SYNC_INTERVAL", 30),
+            "sync_interval" => null, //env("TURSO_SYNC_INTERVAL", 30),
             'prefix' => '',
         ],
         'sqlite' => [
