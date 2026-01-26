@@ -34,7 +34,6 @@ WORKDIR /app
 
 # Variáveis de ambiente para o Octane/FrankenPHP
 ENV AUTOCONF_CADDYFILE_SERVER_NAME="0.0.0.0"
-ENV SERVER_NAME=":8080"
 ENV LARAVEL_OCTANE_SERVER="frankenphp"
 
 # Permissões de escrita para o storage e cache
@@ -48,7 +47,7 @@ RUN php artisan config:cache && \
 # Expor a porta que o Cloud Run espera (padrão 8080)
 EXPOSE 8080
 
-# Comando para iniciar o Octane com FrankenPHP
-CMD ["php", "artisan", "octane:start", "--server=frankenphp", "--host=0.0.0.0", "--port=8080"]
+# Comando para iniciar o Octane com FrankenPHP usando a porta definida pelo Cloud Run
+CMD ["sh", "-c", "php artisan octane:start --server=frankenphp --host=0.0.0.0 --port=${PORT:-8080}"]
 
 #CMD ["php", "-m"]
