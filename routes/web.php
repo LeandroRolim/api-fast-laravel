@@ -7,3 +7,4 @@ Route::get('/', function () {
 });
 
 Route::get('/ip', fn () => request()->ip());
+Route::get('/header', fn () => request()->header());
